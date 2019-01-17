@@ -1,10 +1,11 @@
 ## MiniShift Cheatsheet
 Minishift is a command-line tool that provisions and manages single-node OpenShift clusters optimized for development workflows.
 
-Usage:
-  minishift [command]
+**Usage:**
+  minishift \[command\]
 
-Available Commands:
+**Available Commands:**
+```
   addons	Manages Minishift add-ons.
   completion  	Outputs minishift shell completion for the given shell (bash or zsh)
   config      	Modifies Minishift configuration properties.
@@ -25,8 +26,9 @@ Available Commands:
   status      	Gets the status of the local OpenShift cluster.
   stop        	Stops the running local OpenShift cluster.
   version     	Gets the version of Minishift.
-
-Flags:
+```
+**Flags:**
+```
       --alsologtostderr                  	log to standard error as well as files
   -h, --help                             		help for minishift
       --log_backtrace_at traceLocation   	when logging hits line file:N, emit a stack trace (default :0)
@@ -37,7 +39,8 @@ Flags:
       --stderrthreshold severity         	logs at or above this threshold go to stderr (default 2)
   -v, --v Level                          		log level for V logs
       --vmodule moduleSpec               	comma-separated list of pattern=N settings for file-filtered logging
+```
 
-Use "minishift [command] --help" for more information about a command.
+Use "minishift \[command\] --help" for more information about a command.
 
-https://docs.openshift.org/latest/minishift/command-ref/minishift.html
+[MinShift cmdline reference](https://docs.openshift.org/latest/minishift/command-ref/minishift.html)
