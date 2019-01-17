@@ -1,4 +1,5 @@
 ## Docker cmd Cheatsheet
+```
   $ docker images
   $ docker ps [-a for all]
   $ docker pull <image>:[opt_ver]
@@ -20,5 +21,5 @@
   $ docker push <image_name>
   $ docker rmi $(docker images -q) [=delete all images]
   $ docker diff <image_name>
-
-https://docs.docker.com/engine/reference/commandline/docker/
+```
+[Docker cmdline reference](https://docs.docker.com/engine/reference/commandline/docker/)
