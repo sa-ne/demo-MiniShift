@@ -29,16 +29,15 @@ Minishift is a command-line tool that provisions and manages single-node OpenShi
 ```
 **Flags:**
 ```
-      --alsologtostderr                  	log to standard error as well as files
-  -h, --help                             		help for minishift
-      --log_backtrace_at traceLocation   	when logging hits line file:N, emit a stack trace (default :0)
-      --log_dir string                   		If non-empty, write log files in this directory
-      --logtostderr                      		log to standard error instead of files
-      --profile string                   		Profile name (default "minishift")
-      --show-libmachine-logs             	Show logs from libmachine.
-      --stderrthreshold severity         	logs at or above this threshold go to stderr (default 2)
-  -v, --v Level                          		log level for V logs
-      --vmodule moduleSpec               	comma-separated list of pattern=N settings for file-filtered logging
+      --alsologtostderr             log to standard error as well as files
+  -h, --help                        help for minishift
+      --log_dir string              If non-empty, write log files in this directory
+      --logtostderr                 log to standard error instead of files
+      --profile string              Profile name (default "minishift")
+      --show-libmachine-logs        Show logs from libmachine.
+      --stderrthreshold severity    logs at or above this threshold go to stderr (default 2)
+  -v, --v Level                     log level for V logs
+      --vmodule moduleSpec          comma-separated list of pattern=N settings for file-filtered logging
 ```
 
 Use "minishift \[command\] --help" for more information about a command.
