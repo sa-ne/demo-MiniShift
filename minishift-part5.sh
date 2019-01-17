@@ -1,4 +1,7 @@
 #!/bin/bash
+#
+# Exercise Five: Using a Dockerfile to create an image
+#
 
 TextReset='\033[0m'
 TextGreen='\033[32m'

@@ -1,7 +1,11 @@
 ## MiniShift Demo WalkThru
 
 ### Requirements:
-* Minimum VM: 2vCPU x 6G mem, running RHEL 7.latest
-* At least 20GB free on root filesystem for MiniShift install
+* See Installation doc for requirements
 
 ### WalkThru:
+There are two scenarios for this demo:
+* Individual Exercises Demo -- let's you pick and choose which exercises to demo, allowing for customization
+* Full Demo -- this runs through all exercises but in a more condensed format.  It can be used to conduct a roughly two-hour hands-on lab as well.
+
+Refer to scenario-specific WalkThru documents for details.

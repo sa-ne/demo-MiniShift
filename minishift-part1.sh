@@ -1,4 +1,7 @@
 #!/bin/bash
+#
+# Exercise One: Starting a Minishift/OpenShift Cluster
+#
 
 TextReset='\033[0m'
 TextGreen='\033[32m'

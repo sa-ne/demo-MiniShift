@@ -1,4 +1,7 @@
 #!/bin/bash
+#
+# Exercise Eight: Using MinShift/OpenShift to deploy an externally usable app
+#
 
 TextReset='\033[0m'
 TextGreen='\033[32m'

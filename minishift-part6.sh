@@ -1,4 +1,7 @@
 #!/bin/bash
+#
+# Exercise Six: Using MiniShift/OpenShift to deploy containers
+#
 
 TextReset='\033[0m'
 TextGreen='\033[32m'

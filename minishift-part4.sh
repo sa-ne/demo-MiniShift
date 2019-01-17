@@ -1,4 +1,7 @@
 #!/bin/bash
+#
+# Exercise Four: Modifying a container image
+#
 
 TextReset='\033[0m'
 TextGreen='\033[32m'
@@ -192,7 +195,7 @@ $FormatRunCommand
 minishift ssh -- curl -s 127.0.0.1:8280/course.html
 echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
 
-echo -e $FormatTextSyntax "   
+echo -e $FormatTextSyntax "
 Delete the containers and images created by this lab:
 "
 echo -e $FormatTextPause && read -p "<-- Press any key to remove demo resources, or Ctrl+C to exit -->" NULL

@@ -14,32 +14,32 @@
 EventLabel="NJ RHUG"
 # Used to label container assets, must be lowercase and no spaces.
 EventLabelLowerCase=nj-rhug
-   
+
 TextReset='\033[0m'
 TextGreen='\033[32m'
 TextBlue='\033[34m'
 TextLightGrey='\033[37m'
 TextBold='\033[1m'
-   
+
 FormatTextPause="$TextReset $TextLightGrey"  # Pause & continue
 FormatTextCommands="$TextReset $TextGreen" # Commands to execute
 FormatTextSyntax="$TextReset $TextBlue $TextBold" # Command Syntax & other text
-  
+
 # Place before command line to reset text format
 FormatRunCommand="echo -e $TextReset"
-    
+
 # Reset text if script exits abnormally
 trap 'echo -e $TextReset;exit' 1 2 3 15
 
 
-  
+
 function RunExerciseOne() {
     clear
     echo -e $FormatTextSyntax "
        Exercise One: Starting an OpenShift Cluster
     "
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-  
+
     echo -e $FormatTextSyntax "
        Step One: Validate environment variables ...
     "
@@ -47,7 +47,7 @@ function RunExerciseOne() {
     #env | grep MINISHIFT
     echo "MINISHIFT_USERNAME=<your.Red.Hat.ID>"
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-  
+
     echo -e $FormatTextSyntax "
        Step Two: Start MiniShift cluster ...
     "
@@ -57,7 +57,7 @@ function RunExerciseOne() {
     $FormatRunCommand
     minishift start
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        Check that the origin container is running inside the VM created by Minishift:
     "
@@ -68,7 +68,7 @@ function RunExerciseOne() {
     $FormatRunCommand
     minishift ssh -- docker ps
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        Check that a few container images were pulled by the Minishift VM:
     "
@@ -79,7 +79,7 @@ function RunExerciseOne() {
     $FormatRunCommand
     minishift ssh -- docker images
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        Check that the registry and router pods are ready and running.
        Log in to OpenShift as the cluster administrator user:
@@ -91,7 +91,7 @@ function RunExerciseOne() {
     $FormatRunCommand
     oc login -u system:admin
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        Use the oc get pod command on the default project to check the OpenShift registry
        and router pods are ready and running:
@@ -103,7 +103,7 @@ function RunExerciseOne() {
     $FormatRunCommand
     oc get pod -n default
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-  
+
     echo -e $FormatTextSyntax "
        Access the web console as a developer user.
        Open the OpenShift web console.
@@ -119,7 +119,7 @@ function RunExerciseOne() {
     minishift console
     echo -e $FormatTextPause && read -p "<-- End of Exercise: Press any key to continue -->" NULL && echo -e $TextReset
 }
-    
+
 function RunExerciseTwo() {
     clear
     echo -e $FormatTextSyntax "
@@ -129,7 +129,7 @@ function RunExerciseTwo() {
     $FormatRunCommand
     minishift start
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        Start the first MySQL server container using the following command:
        This command downloads the MySQL database container image from Red Hat
@@ -143,7 +143,7 @@ function RunExerciseTwo() {
     $FormatRunCommand
     minishift ssh -- docker run -d --name mysql-1st rhscl/mysql-56-rhel7
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        Check that the container is running:
            Spoiler Alert = Oops! What happened??
@@ -169,7 +169,7 @@ function RunExerciseTwo() {
     $FormatRunCommand
     minishift ssh -- docker logs mysql-1st
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        Start a second MySQL server container, providing the required environment variables.
        Specify each variable using the -e option.
@@ -184,7 +184,7 @@ function RunExerciseTwo() {
     $FormatRunCommand
     minishift ssh -- docker run --name mysql-2nd -e MYSQL_USER=user1 -e MYSQL_PASSWORD=mypa55 -e MYSQL_DATABASE=items -e MYSQL_ROOT_PASSWORD=r00tpa55 -d rhscl/mysql-56-rhel7
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        Verify that the container was started correctly. Run the following command:
     "
@@ -195,7 +195,7 @@ function RunExerciseTwo() {
     $FormatRunCommand
     minishift ssh -- docker ps -a | grep mysql
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        Inspect the container metadata to obtain the IP address from the
        MySQL database server container:
@@ -239,14 +239,14 @@ function RunExerciseTwo() {
     "
     echo "docker run --name mysql-3rd -it rhscl/mysql-56-rhel7 bash" | xclip -selection clipboard
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-  
+
     echo -e $FormatTextSyntax "
        Notice that this container image displays a Bash prompt for a regular user.
        Different from the MySQL image from the Docker Hub, the image provided
        by Red Hat does not run as the root user.
     "
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        Try to connect to the local MySQL database:
     "
@@ -260,7 +260,7 @@ function RunExerciseTwo() {
        not started in the third container.
     "
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        Connect to the remote MySQL server in the second container,
        from the third container.
@@ -271,7 +271,7 @@ function RunExerciseTwo() {
     "
     echo "mysql -uuser1 -h $MYSQL_2ND_IPADDR -pmypa55 items" | xclip -selection clipboard
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-   
+
     echo -e $FormatTextSyntax "
        You are connected to the items remote database. Create a new table:
     "
@@ -280,7 +280,7 @@ function RunExerciseTwo() {
     "
     echo "CREATE TABLE Courses (id int NOT NULL, name varchar(255) NOT NULL, PRIMARY KEY (id));" | xclip -selection clipboard
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        Insert a row into the table by running the following command:
     "
@@ -289,7 +289,7 @@ function RunExerciseTwo() {
     "
     echo "insert into Courses (id, name) values (1,'$EventLabel');" | xclip -selection clipboard
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        Validate:
     "
@@ -298,13 +298,13 @@ function RunExerciseTwo() {
     "
     echo "select * from Courses;" | xclip -selection clipboard
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        Exit from the MySQL prompt:
        Exit from the bash shell:
     "
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        When you exit the bash shell, the third container was stopped.
        Verify that the container mysql-3rd is not running, but the
@@ -317,7 +317,7 @@ function RunExerciseTwo() {
     $FormatRunCommand
     minishift ssh -- docker ps -a | grep mysql
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-   
+
     echo -e $FormatTextSyntax "
        Delete the containers and resources created by this exercise.
 		$ minishift ssh -- 'docker stop \$(docker ps -q)'
@@ -332,7 +332,7 @@ function RunExerciseTwo() {
     echo -e $FormatTextPause && read -p "<-- End of Exercise: Press any key to continue -->" NULL && echo -e $TextReset
 }
 
-function RunExerciseThree() {    
+function RunExerciseThree() {
     clear
     echo -e $FormatTextSyntax "
        Exercise Three: Creating a Custom Apache Container Image
@@ -341,7 +341,7 @@ function RunExerciseThree() {
     $FormatRunCommand
     minishift start
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        Create a container from the centos/httpd image with the following command:
     "
@@ -352,7 +352,7 @@ function RunExerciseThree() {
     $FormatRunCommand
     minishift ssh -- docker run -d --name httpd-orig -p 8180:80 centos/httpd
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        Create a new HTML page in the http-orig container.
        Access the container bash shell:
@@ -379,7 +379,7 @@ function RunExerciseThree() {
     "
     echo "docker exec -it httpd-orig bash" | xclip -selection clipboard
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        Add an HTML page:
     "
@@ -388,12 +388,12 @@ function RunExerciseThree() {
     "
     echo 'echo "$EventLabel Page" > /var/www/html/course.html' | xclip -selection clipboard
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        Exit the bash shell:
     "
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        Test if the page is reachable:
     "
@@ -404,7 +404,7 @@ function RunExerciseThree() {
     $FormatRunCommand
     minishift ssh -- curl -s 127.0.0.1:8180/course.html
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        Examine the differences in the container between the image and
        the new layer created by the container:
@@ -416,7 +416,7 @@ function RunExerciseThree() {
     $FormatRunCommand
     minishift ssh -- docker diff httpd-orig
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        The previous output lists the directories and files that were changed
        or added to the httpd-orig container.
@@ -432,7 +432,7 @@ function RunExerciseThree() {
     $FormatRunCommand
     minishift ssh -- docker stop httpd-orig
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        Commit the changes to a new container image:
     "
@@ -443,7 +443,7 @@ function RunExerciseThree() {
     $FormatRunCommand
     minishift ssh -- 'docker commit -a "$EventLabel" -m "Added course.html page" httpd-orig'
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        List the available container images:
     "
@@ -459,7 +459,7 @@ function RunExerciseThree() {
     $FormatRunCommand
     minishift ssh -- docker images | grep -v openshift
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        The new container image has neither a name (REPOSITORY column) nor a tag.
        Use the following command to add this information:
@@ -472,7 +472,7 @@ function RunExerciseThree() {
     $FormatRunCommand
     minishift ssh -- docker tag $IMAGE_TAG $EventLabelLowerCase/httpd
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        List the available container images again to confirm that the name
        and tag were applied to the correct image:
@@ -484,7 +484,7 @@ function RunExerciseThree() {
     $FormatRunCommand
     minishift ssh -- docker images | grep -v openshift
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        Create and test a container using the new image.
        Create a new container, using the new image:
@@ -496,7 +496,7 @@ function RunExerciseThree() {
     $FormatRunCommand
     minishift ssh -- docker run -d --name httpd-custom -p 8280:80 $EventLabelLowerCase/httpd
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        Check that the new container is running and using the correct image:
     "
@@ -507,7 +507,7 @@ function RunExerciseThree() {
     $FormatRunCommand
     minishift ssh -- docker ps -a
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        Check that the container includes the custom page:
     "
@@ -518,7 +518,7 @@ function RunExerciseThree() {
     $FormatRunCommand
     minishift ssh -- curl -s 127.0.0.1:8280/course.html
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
     Delete the containers and images created by this lab:
 		$ minishift ssh -- 'docker stop \$(docker ps -q)'
@@ -534,7 +534,7 @@ function RunExerciseThree() {
     minishift ssh -- docker rmi centos/httpd
     echo -e $FormatTextPause && read -p "<-- End of Exercise: Press any key to continue -->" NULL && echo -e $TextReset
 }
-    
+
 function RunExerciseFour() {
     clear
     echo -e $FormatTextSyntax "
@@ -544,11 +544,11 @@ function RunExerciseFour() {
     $FormatRunCommand
     minishift start
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        Create a Dockerfile that installs and configures Apache HTTP server.
-    
-    
+
+
        Create a folder to contain the Dockerfile and its supporting files.
        For this exercise, there are no supporting files. But anyway it is
        recommended to have the Dockerfile in a folder by itself.
@@ -559,7 +559,7 @@ function RunExerciseFour() {
     $FormatRunCommand
     minishift ssh -- mkdir httpd-image
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        Download the Dockerfile from the course project in GitHub
     "
@@ -569,7 +569,7 @@ function RunExerciseFour() {
     $FormatRunCommand
     minishift ssh -- curl -sO https://raw.githubusercontent.com/RedHatTraining/DO081x-lab/master/httpd-image/Dockerfile
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        Then move the Dockerfile source to the httpd-image folder:
     "
@@ -579,7 +579,7 @@ function RunExerciseFour() {
     $FormatRunCommand
     minishift ssh -- mv Dockerfile httpd-image
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        To save time, let's edit the Dockerfile to use a newer image.
        Edit the Dockerfile to use the rhel7.5 image versus rhel7.3
@@ -590,7 +590,7 @@ function RunExerciseFour() {
     $FormatRunCommand
     minishift ssh -- 'sed -i s/rhel7.3/rhel7.5/ httpd-image/Dockerfile'
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
- 
+
     echo -e $FormatTextSyntax "
        Inspect the Dockerfile you downloaded to check how the image
        created from it should be.
@@ -607,39 +607,39 @@ function RunExerciseFour() {
           The following FROM instruction, at the top of the Dockerfile,
           uses RHEL 7.5 as a base image:
        FROM rhel7.5
-    
+
           Below the FROM instruction, the MAINTAINER instruction sets
           the Author field in the new image, for documentation purposes
        MAINTAINER Your Name <youremail>
-    
-    
+
+
           Below the MAINTAINER instruction, the LABEL instruction adds
           description metadata to the new image:
        LABEL description="A basic Apache HTTP server container on RHEL 7"
-    
+
           The RUN instruction executes yum commands to install Apache HTTP server
           on the new container and perform clean up after the installation is done:
        RUN yum -y update && \
            yum install -y httpd &&
            yum clean all
-    
+
           Use the EXPOSE instruction below the RUN instruction to document the port
           that the container listens to at runtime. In this instance, set the port to 80,
           because it is the default for an Apache server:
        EXPOSE 80
-    
+
           At the end of the file, the ENTRYPOINT instruction sets httpd as the default
           executable when the container is started, and the CMD sets the default arguments
           for the httpd executable.
        ENTRYPOINT  ["httpd"]
        CMD  ["-D", "FOREGROUND"]
-    
+
           The -D FOREGROUND runs httpd as a foreground process.
           A containerized process should not start additional processes if there is no need,
           and should not put itself in the background.
     '
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        Build and verify the Apache HTTP server image
        Use the docker build command to create a new container image from the Dockerfile:
@@ -651,7 +651,7 @@ function RunExerciseFour() {
     $FormatRunCommand
     minishift ssh -- docker build -t $EventLabelLowerCase/httpd2 httpd-image
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        After the build process has finished, run docker images to see the
        new image in the image repository:
@@ -662,7 +662,7 @@ function RunExerciseFour() {
     $FormatRunCommand
     minishift ssh -- docker images | grep -v openshift
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        Run the Apache HTTP server container
        Create container using the new image, and redirect local port 10080
@@ -674,7 +674,7 @@ function RunExerciseFour() {
     $FormatRunCommand
     minishift ssh -- docker run --name my-httpd -d -p 10080:80 $EventLabelLowerCase/httpd2
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        Check that the new container is running:
     "
@@ -684,7 +684,7 @@ function RunExerciseFour() {
     $FormatRunCommand
     minishift ssh -- docker ps | grep -v openshift
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        Use a curl command to check that the server is serving HTTP requests:
     "
@@ -698,7 +698,7 @@ function RunExerciseFour() {
     $FormatRunCommand
     minishift ssh -- curl -s 127.0.0.1:10080 | grep 'Test Page'
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        Stop and then remove the my-httpd container:
 		$ minishift ssh -- 'docker stop \$(docker ps -q)'
@@ -716,7 +716,7 @@ function RunExerciseFour() {
     echo -e $FormatTextPause && read -p "<-- End of Exercise: Press any key to continue -->" NULL && echo -e $TextReset
 }
 
-function RunExerciseFive() {    
+function RunExerciseFive() {
     clear
     echo -e $FormatTextSyntax "
        Exercise Five: Deploying a Database Server on OpenShift
@@ -725,15 +725,15 @@ function RunExerciseFive() {
     $FormatRunCommand
     minishift start
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        Log in to OpenShift as a developer user and create
        a new project for this exercise.
-    
+
        Different from previous exercises, this time most commands are executed
        from your operating system prompt.
        There will be no need to open a SSH session to the Minishift VM.
-    
+
        Log in to OpenShift as the developer user:
     "
     echo -e $FormatTextCommands "
@@ -742,7 +742,7 @@ function RunExerciseFive() {
     $FormatRunCommand
     oc login -u developer -p developer
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        Create a new project for the resources you will create during this exercise:
     "
@@ -752,7 +752,7 @@ function RunExerciseFive() {
     $FormatRunCommand
     oc new-project database
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        Create a new application from the MySQL server container image provided by Red Hat.
        This image requires several environment variables
@@ -771,7 +771,7 @@ function RunExerciseFive() {
     $FormatRunCommand
     oc new-app --name=mysql --docker-image=registry.access.redhat.com/rhscl/mysql-56-rhel7 -e MYSQL_USER=user1 -e MYSQL_PASSWORD=mypa55 -e MYSQL_DATABASE=testdb -e MYSQL_ROOT_PASSWORD=r00tpa55
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        Verify if the MySQL pod was created successfully and view details
        about the pod and it's service.
@@ -785,7 +785,7 @@ function RunExerciseFive() {
     $FormatRunCommand
     oc status
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        List the pods in this project to check if the MySQL server pod
        is ready and running:
@@ -804,7 +804,7 @@ function RunExerciseFive() {
     $FormatRunCommand
     gnome-terminal --command 'oc get pods -w' --tab
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        Use the oc describe command to view more details about the pod.
        Be sure to use the same pod name displayed by the previous step:
@@ -818,7 +818,7 @@ function RunExerciseFive() {
     $FormatRunCommand
     oc describe pod $MYSQL_POD
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        List the services in this project and check if a service to access
        the MySQL pod was created:
@@ -829,7 +829,7 @@ function RunExerciseFive() {
     $FormatRunCommand
     oc get svc
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        Describe the mysql service and note that the Service type is
        ClusterIP by default:
@@ -840,7 +840,7 @@ function RunExerciseFive() {
     $FormatRunCommand
     oc describe svc mysql
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        View details about the Deployment Configuration (dc) for this application:
     "
@@ -851,7 +851,7 @@ function RunExerciseFive() {
     $FormatRunCommand
     oc describe dc mysql
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        Export the service created by oc new-app and inspect its contents.
     "
@@ -864,7 +864,7 @@ function RunExerciseFive() {
     $FormatRunCommand
     more mysql-svc.yml
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        Using plain Kubernetes, you would need to create this file manually,
        plus similar files for the deployment configuration and other resources
@@ -874,7 +874,7 @@ function RunExerciseFive() {
        accepting all kubectl arguments and more.
     "
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        Connect to the MySQL server and check that the database was initialized.
        To avoid the need for a MySQL client on your workstation,
@@ -896,7 +896,7 @@ function RunExerciseFive() {
     $FormatRunCommand
     gnome-terminal --command "oc rsh $MYSQL_POD" --tab
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        Connect to the MySQL server using the MySQL client with the loop back IP address:
     "
@@ -909,7 +909,7 @@ function RunExerciseFive() {
     "
     echo "mysql -h127.0.0.1 -P3306 -uuser1 -pmypa55" | xclip -selection clipboard
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        Verify if the testdb database has been created:
     "
@@ -918,12 +918,12 @@ function RunExerciseFive() {
     "
     echo "show databases;" | xclip -selection clipboard
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        Exit from the MySQL client prompt and the pod Bash prompt:
     "
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        Open the Web UI and view details about project = database
        Make sure you're logging in as user: developer
@@ -932,7 +932,7 @@ function RunExerciseFive() {
     $FormatRunCommand
     minishift console
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        Delete the project and all the resources in the project:
     "
@@ -945,7 +945,7 @@ function RunExerciseFive() {
     echo -e $FormatTextPause && read -p "<-- End of Exercise: Press any key to continue -->" NULL && echo -e $TextReset
 }
 
-function RunExerciseSix() {    
+function RunExerciseSix() {
     clear
     echo -e $FormatTextSyntax "
        Exercise Six: Creating a Containerized Application with Source-to-Image
@@ -954,7 +954,7 @@ function RunExerciseSix() {
     $FormatRunCommand
     minishift start
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        Log in to OpenShift as the developer user:
     "
@@ -965,7 +965,7 @@ function RunExerciseSix() {
     $FormatRunCommand
     oc login -u developer -p developer
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        Create a new project named s2i:
     "
@@ -976,7 +976,7 @@ function RunExerciseSix() {
     $FormatRunCommand
     oc new-project s2i
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        Create a new PHP application using the course repository in GitHub.
        Use the oc new-app command to create the PHP application.
@@ -993,7 +993,7 @@ function RunExerciseSix() {
     $FormatRunCommand
     oc new-app --name=hello php:7.0~https://github.com/RedHatTraining/DO081x-lab-php-helloworld.git
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        Wait for the build to complete. Follow the build logs:
        Notice the clone of the Git repository as the first step of the build.
@@ -1008,7 +1008,7 @@ function RunExerciseSix() {
     $FormatRunCommand
     oc logs -f bc/hello
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax '
        Wait until the application pod is ready and running.
        The pod with name ending in "build" ran the build process and should be completed.
@@ -1021,7 +1021,7 @@ function RunExerciseSix() {
     $FormatRunCommand
     gnome-terminal --command 'oc get pods -w' --tab
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        Review the resources that were created by the oc new-app command.
     "
@@ -1037,10 +1037,10 @@ function RunExerciseSix() {
     $FormatRunCommand
     oc status
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     $FormatRunCommand
     SVC_IPADDR=`oc status | grep 8080 | cut -f3 -d' '`
-    
+
     echo -e $FormatTextSyntax "
        Examine the build configuration resource using oc describe:
     "
@@ -1055,7 +1055,7 @@ function RunExerciseSix() {
        So far, there has been only one build and that build completed successfully.
     "
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        Test the application by running the curl command inside the Minishift VM.
     "
@@ -1070,7 +1070,7 @@ function RunExerciseSix() {
        The next step will show how to expose a web application or service.
     "
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        Expose the web application by creating a route resource.
        Expose the application service to create a route:
@@ -1082,7 +1082,7 @@ function RunExerciseSix() {
     $FormatRunCommand
     oc expose svc hello
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        Check the DNS name generated for the route by OpenShift:
     "
@@ -1100,7 +1100,7 @@ function RunExerciseSix() {
        configured for the OpenShift cluster.
     "
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        Check that the application can be accessed, from your workstation.
        Open a web browser and access the host name you got from the previous step.
@@ -1111,14 +1111,14 @@ function RunExerciseSix() {
     $FormatRunCommand
     firefox $ROUTE_URL &
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        Open the Web UI and view details about project = s2i
     "
     $FormatRunCommand
     #minishift console
     echo -e $FormatTextPause && read -p "<-- Press any key to continue -->" NULL
-    
+
     echo -e $FormatTextSyntax "
        Clean up the lab by deleting the OpenShift project, which in turn
        deletes all the Kubernetes and OpenShift resources:
@@ -1177,4 +1177,3 @@ case "$1" in
 	exit 1
 	;;
 esac
-

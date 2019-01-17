@@ -1,4 +1,7 @@
 #!/bin/bash
+#
+# Exercise Seven: Deploying apps directly from code via S2I
+#
 
 TextReset='\033[0m'
 TextGreen='\033[32m'

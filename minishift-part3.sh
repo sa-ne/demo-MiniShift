@@ -1,4 +1,7 @@
 #!/bin/bash
+#
+# Exercise Three: Working with a container, making it usable
+#
 
 TextReset='\033[0m'
 TextGreen='\033[32m'
