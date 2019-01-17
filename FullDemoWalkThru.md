@@ -1,6 +1,6 @@
 ## MiniShift Full Demo WalkThru
 
-** Note: this document needs updating, specifically additional detail.  Consider it DRAFT at this point.**
+***Note: this document needs updating, specifically additional detail.  Consider it DRAFT at this point.***
 
 ### Requirements:
 * See Installation doc for requirements
@@ -64,10 +64,10 @@
 
 
 #### Exercise Three: Using & Creating docker images
-* Note security differences
-  * Image was pulled from docker.io not RH, and centos vs rhel
+* Note security differences (here we are root)
+  * Image was pulled from docker.io not RH, and CentOS vs RHEL 
 ```
-# docker exec = # whoami, here we are root
+# docker exec
 ```
 * Access apache via port redirect, in 2nd cmd window:
   * docker diff = [A]dded  [C]hanged
@@ -76,12 +76,11 @@
 ```
 # docker ps -a
 # docker diff
-# docker commit = creates/saves new image with above changes
+# docker commit
 ```
-*  Make image identifiable and consumable; note before & after
+*  Make image identifiable and consumable; note before & after of httpd-custom
 ```
 # docker tag
-# httpd-custom
 ```
 
 
@@ -129,7 +128,7 @@
 ```
 # oc rsh: # whoami
 ```
-* notice container name, processes, and content
+* Notice container name, processes, and content
 ``` 
 # oc rsh: # hostname
 # oc rsh: # ps -ef; ls -la /var/www/html
@@ -154,9 +153,6 @@
   * A new pod can then be created from this image, running the application
   * S2I can be viewed as a complete CI/CD pipeline already built into OpenShift.
 * In testing, build time = 2-3 min
-```
-# s2i
-```
  * What is a build config (bc)?
    * A build configuration contains a description of how to build source code and a base image into a new image.
 ```
